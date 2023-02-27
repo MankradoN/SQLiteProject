@@ -1,3 +1,6 @@
+import controller
+from service import ordermethods
+
 # This file is testing the functions of controller.py, all functions within this file should be tested. 
 # Unit tests are not testing the entire app, just this single function
 # When testing you should be using a TEST_DB, to easily do this modify the db.py so it is using a new DB
@@ -7,7 +10,7 @@ def test_read_by_id():
     # Arrange - Variables and values needed for the test
     test_id = 1
     result = None
-    expected = Order("test name", "test mocha", False, 1.23)
+    expected = ordermethods("test name", "test mocha", False, 1.23)
 
     # Act - What you are testing 
     result = controller.read_by_id(test_id)
