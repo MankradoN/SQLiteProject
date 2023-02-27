@@ -3,17 +3,13 @@
 
 import sqlite3
 
-conn = sqlite3.connect("/orders")
+conn = sqlite3.connect("orders")
 curs = conn.cursor()
-sql_file = open("order.sql")
-sql_string = sql_file.read()
-curs.executescript(sql_string)
 _orders={}
 
-class ordermethods():
+class ordermethods:
     """class of available methods """
-
-    def __init__(self,username,password):
+    def __init__(self,username=input("Username:"),password=input("Password:")):
         """initialising vars"""
         self.username=username
         self.__password=password
@@ -25,6 +21,7 @@ class ordermethods():
                             VALUES ({customer}, {item}, {quantity})")
             return f"added {customer}'s order of {quantity} {item} to the orders table "
 
+
     def update_Order(self,customer):
         if "admin" in self.username and len(self.__password)>8 :
             choice=input("do you want to update item or quantity?")
@@ -34,7 +31,8 @@ class ordermethods():
                             WHERE customer = {customer}")
             return f"updated {customer}'s order to {value} {column} "
 
-    def addCurrOrder(self,customer=input("Customer name: "),input_iter=1):
+
+    def addCurrOrder(self,customer=input("Customer: "),input_iter=1):
         """add to items to order """
         self.customer=customer
         self.item=item
@@ -44,15 +42,18 @@ class ordermethods():
             _orders[self.customer][item]=quantity
             return("added order")
 
+
     def getOrders(self):
         """get all orders from order table"""
         if "admin" in self.username and len(self.__password)>8 :
             return curs.execute("SELECT * FROM orders")
         return "Incorrect login"
         
+
     def getCurrOrder(self):
         """get buffer orders- uncommitted"""
         return _orders.items()
+
 
     def commit_Curr_Orders(self):
         """commit uncommitted orders,only means to commit to table"""
@@ -64,12 +65,12 @@ class ordermethods():
         conn.commit()
         return"committed change"
 
-    def delete_Curr_Order(self,customer):
+    def delete_Curr_Order(self,customer=input("Customer:")):
         """deleting customer order from uncommitted orders"""
         del _orders[customer]
         return f"deleted order by {customer}"
 
-    def update_Curr_Item(self,customer,item,quantity):
+    def update_Curr_Item(self,customer=input("Customer:"),item=input("Item:"),quantity=input("Quantity:")):
         """updating uncommitted orders"""
         _orders[customer][item]=quantity
         return "updated uncommitted orders"

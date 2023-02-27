@@ -3,7 +3,7 @@
 
 # It will run commands from the service file, which in turn uses the DB file to 
 # query and create data and will return the data back to the use
-import service
+from service import ordermethods
 
 print("Welcome to the QA Cafe, what would you like to do?:")
 action=input("\
@@ -17,20 +17,27 @@ action=input("\
         8. update item in list\
         "
 )
-match action:
-    case 1:
-        print(service.add_Order())
-    case 2:
-        print(service.update_Order())
-    case 3:
-        print(service.addCurrOrder())
-    case 4:
-        print(service.getOrders())
-    case 5:
-        print(service.getCurrOrder())
-    case 6:
-        print(service.commit_Curr_Orders())
-    case 7:
-        print(service.delete_Curr_Order())
-    case 8:
-        print(service.update_Curr_Item())
+class controller:
+    """allow user to choose action and execute"""
+    def __init__(self, action):
+        
+        self.action= action
+        match action:
+        
+            case 1:
+                print(ordermethods.add_Order())
+            case 2:
+                print(ordermethods.update_Order())
+            case 3:
+                print(ordermethods.addCurrOrder())
+            case 4:
+                print(ordermethods.getOrders())
+            case 5:
+                print(ordermethods.getCurrOrder())
+            case 6:
+                print(ordermethods.commit_Curr_Orders())
+            case 7:
+                print(ordermethods.delete_Curr_Order())
+            case 8:
+                print(ordermethods.update_Curr_Item())
+controller(action)
