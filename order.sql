@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS orders (
-    orders_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    item VARCHAR(30) NOT NULL ,
-    customer VARCHAR(30) NOT NULL,
-    quantity INTEGER  NULL
-)
