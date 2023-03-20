@@ -1,6 +1,7 @@
 # The service file interacts with the DB file to Query or Modify data within the database
 # Typically there will be a function for each process that is required, and these will take in data and return data
 
+import getpass
 import sqlite3
 
 conn = sqlite3.connect("orders")
@@ -9,7 +10,7 @@ _orders={}
 
 class ordermethods:
     """class of available methods """
-    def __init__(self,username=input("Username:"),password=input("Password:")):
+    def __init__(self,username=input("Username: "),password=getpass.getpass("Password:")):
         """initialising vars"""
         self.username=username
         self.__password=password
@@ -21,7 +22,6 @@ class ordermethods:
                             VALUES ({customer}, {item}, {quantity})")
             return f"added {customer}'s order of {quantity} {item} to the orders table "
 
-
     def update_Order(self,customer):
         if "admin" in self.username and len(self.__password)>8 :
             choice=input("do you want to update item or quantity?")
@@ -30,7 +30,6 @@ class ordermethods:
             curs.execute(f"UPDATE orders SET {column}={value} \
                             WHERE customer = {customer}")
             return f"updated {customer}'s order to {value} {column} "
-
 
     def addCurrOrder(self,customer=input("Customer: "),input_iter=1):
         """add to items to order """
@@ -49,11 +48,9 @@ class ordermethods:
             return curs.execute("SELECT * FROM orders")
         return "Incorrect login"
         
-
     def getCurrOrder(self):
         """get buffer orders- uncommitted"""
         return _orders.items()
-
 
     def commit_Curr_Orders(self):
         """commit uncommitted orders,only means to commit to table"""
