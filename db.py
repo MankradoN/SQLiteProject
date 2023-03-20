@@ -6,6 +6,6 @@ conn = sqlite3.connect("orders")
 curs = conn.cursor()
 
 """initialise table by reading sql in order"""
-sql_file = open("order.sql")
+sql_file = open('./order.sql')
 sql_string = sql_file.read()
 curs.executescript(sql_string)
