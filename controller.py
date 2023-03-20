@@ -5,19 +5,20 @@
 # query and create data and will return the data back to the use
 from service import ordermethods
 
-print("Welcome to the QA Cafe, what would you like to do?:")
+print("Welcome to the QA-DevOps Cafe, what would you to drink?:")
+
 action=input("\
-        1. add order/s \
-        2. update order in table\
-        3. add to current order list\
-        4. get allorders\
-        5. get orders in list\
-        6. commit current orders\
-        7. delete order in list \
-        8. update item in list\
+        1. add order/s \n \
+        2. update order in table \n\
+        3. add to current order list \n\
+        4. get allorders \n\
+        5. get orders in list \n\
+        6. commit current orders \n\
+        7. delete order in list \n\
+        8. update item in list \n\
         "
 )
-class controller:
+class controller_class:
     """allow user to choose action and execute"""
     def __init__(self, action):
         
@@ -40,4 +41,4 @@ class controller:
                 print(ordermethods.delete_Curr_Order())
             case 8:
                 print(ordermethods.update_Curr_Item())
-controller(action)
+controller_class(action)
