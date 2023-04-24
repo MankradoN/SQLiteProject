@@ -7,7 +7,7 @@ from service import ordermethods
 
 print("Welcome to the QA-DevOps Cafe, what would you to drink?:")
 
-action=input("\
+action=input(int("\
         1. add order/s \n \
         2. update order in table \n\
         3. add to current order list \n\
@@ -17,11 +17,11 @@ action=input("\
         7. delete order in list \n\
         8. update item in list \n\
         "
-)
+))
 class controller_class:
     """allow user to choose action and execute"""
     def __init__(self, action):
-        
+        # while loop
         self.action= action
         match action:
         
